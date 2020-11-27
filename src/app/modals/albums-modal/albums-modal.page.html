@@ -43,8 +43,7 @@
               <ion-item>
                 <ion-label>Artista:</ion-label>
                 <ion-select placeholder="Selecciona uno" formControlName="pArtists">
-                  <ion-select-option value="f">Female</ion-select-option>
-                  <ion-select-option value="m">Male</ion-select-option>
+                  <ion-select-option value="{{artista.artist_id}}" *ngFor="let artista of artists_list">{{artista.artist_name}}</ion-select-option>
                 </ion-select>
               </ion-item>
               <div class="ion-text-end" *ngIf="form_sent && albumForm.controls.pArtists.invalid">
@@ -54,8 +53,7 @@
               <ion-item>
                 <ion-label>G&eacute;nero:</ion-label>
                 <ion-select placeholder="Selecciona uno" formControlName="pGenre">
-                  <ion-select-option value="f">Female</ion-select-option>
-                  <ion-select-option value="m">Male</ion-select-option>
+                  <ion-select-option value="{{genre.genre_id}}" *ngFor="let genre of genres_list">{{genre.genre_name}}</ion-select-option>
                 </ion-select>
               </ion-item>
               <div class="ion-text-end" *ngIf="form_sent && albumForm.controls.pGenre.invalid">
