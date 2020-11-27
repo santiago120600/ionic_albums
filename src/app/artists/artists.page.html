@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Artistas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button size="small" (click)="new_artist();">
+    <ion-icon name="add-outline"></ion-icon>Nuevo
+  </ion-button>
+
+  <ion-list>
+    <ion-list-header>
+      Lista de Artistas
+    </ion-list-header>
+  </ion-list>
+  
+  <ion-item *ngFor="let artist of artists_list">
+    <ion-avatar slot="start">
+      <img src="./assets/shapes.svg">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{artist.artist_name}}</h2>
+    </ion-label>
+  </ion-item>
+
+</ion-content>

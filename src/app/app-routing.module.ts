@@ -19,6 +19,22 @@ const routes: Routes = [
     path: 'albums-modal',
     loadChildren: () => import('./modals/albums-modal/albums-modal.module').then( m => m.AlbumsModalPageModule)
   },
+  {
+    path: 'genres',
+    loadChildren: () => import('./genres/genres.module').then( m => m.GenresPageModule)
+  },
+  {
+    path: 'artists',
+    loadChildren: () => import('./artists/artists.module').then( m => m.ArtistsPageModule)
+  },
+  {
+    path: 'genres-modal',
+    loadChildren: () => import('./modals/genres-modal/genres-modal.module').then( m => m.GenresModalPageModule)
+  },
+  {
+    path: 'artists-modal',
+    loadChildren: () => import('./modals/artists-modal/artists-modal.module').then( m => m.ArtistsModalPageModule)
+  },
 ];
 
 @NgModule({
