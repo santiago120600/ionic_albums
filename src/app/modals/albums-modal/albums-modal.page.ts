@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormControl, FormGroup,FormBuilder, Validator, Validators } from '@angular/forms';
 import { ServicesService } from '../../services/services.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-albums-modal',
@@ -18,7 +19,8 @@ export class AlbumsModalPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
-    private servicio : ServicesService
+    private servicio : ServicesService,
+    public toastController: ToastController
   ) {
     this.albumForm = this.formBuilder.group({
 
@@ -75,8 +77,27 @@ export class AlbumsModalPage implements OnInit {
     if (this.albumForm.invalid) {
       return;
     }else{
-      // no se
+      this.servicio.do_post("albums/api/albums",this.albumForm.value).subscribe(data => 
+      {
+        
+        if (data.status=200) {
+          this.dismiss();  
+          this.show_toast(data.message,"success");
+        }else{
+          this.dismiss();
+          this.show_toast(data.message,"error");
+        }
+      });
     }
+  }
+
+  async show_toast(_message,_color){
+    const toast = await this.toastController.create({
+      message: _message,
+      duration: 2000,
+      color: _color
+    });
+    toast.present();
   }
 
   dismiss(){

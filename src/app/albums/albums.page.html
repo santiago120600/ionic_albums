@@ -11,4 +11,22 @@
   <ion-button size="small" (click)="new_album();">
     <ion-icon name="add-outline"></ion-icon>Nuevo
   </ion-button>
+
+  <ion-list>
+    <ion-list-header>
+      Lista de &Aacute;lbumes
+    </ion-list-header>
+  </ion-list>
+  
+  <ion-item *ngFor="let album of albums_list">
+    <ion-avatar slot="start">
+      <img src="./assets/shapes.svg">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{album.album_name}}</h2>
+      <h3>{{album.album_date_released}} . {{album.album_time_released}}</h3>
+      <p>{{album.artist_name}} . {{album.genre_name}}</p>
+    </ion-label>
+  </ion-item>
+
 </ion-content>
