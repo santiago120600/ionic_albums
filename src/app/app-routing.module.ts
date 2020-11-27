@@ -35,6 +35,14 @@ const routes: Routes = [
     path: 'artists-modal',
     loadChildren: () => import('./modals/artists-modal/artists-modal.module').then( m => m.ArtistsModalPageModule)
   },
+  {
+    path: 'concerts-modal',
+    loadChildren: () => import('./modals/concerts-modal/concerts-modal.module').then( m => m.ConcertsModalPageModule)
+  },
+  {
+    path: 'concerts',
+    loadChildren: () => import('./concerts/concerts.module').then( m => m.ConcertsPageModule)
+  },
 ];
 
 @NgModule({

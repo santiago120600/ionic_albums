@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Conciertos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button size="small" (click)="new_concert();">
+    <ion-icon name="add-outline"></ion-icon>Nuevo
+  </ion-button>
+
+  <ion-list>
+    <ion-list-header>
+      Lista de Conciertos
+    </ion-list-header>
+  </ion-list>
+  
+  <ion-item *ngFor="let concert of concerts_list">
+    <ion-avatar slot="start">
+      <img src="./assets/shapes.svg">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{concert.concert_title}}</h2>
+      <h3>{{concert.concert_date}} . {{concert.concert_place}}</h3>
+      <p>{{concert.artist_name}}</p>
+    </ion-label>
+  </ion-item>
+
+</ion-content>

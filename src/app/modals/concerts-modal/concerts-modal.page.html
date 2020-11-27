@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Conciertos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss();">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size-sm="6" size-md="6" size-lg="12" size="12" color="primary"> 
+      <ion-card>
+        <form (ngSubmit)="save_concert();" [formGroup]="concertForm">
+          <ion-card-content>
+              <!-- input -->
+              <ion-item>
+                <ion-label position="floating">T&iacute;tulo:</ion-label>
+                <ion-input type="text" formControlName="pTitle"></ion-input>
+              </ion-item>
+              <div class="ion-text-end" *ngIf="form_sent && concertForm.controls.pTitle.invalid">
+                <ion-text color="danger">T&iacute;tulo requerido.</ion-text>
+              </div>
+              <!-- input -->
+              <ion-item>
+                <ion-label>Fecha:</ion-label>
+                <ion-datetime displayFormat="YYYY-MM-DD" formControlName="pDate"></ion-datetime>
+              </ion-item>
+              <div class="ion-text-end" *ngIf="form_sent && concertForm.controls.pDate.invalid">
+                <ion-text color="danger">Fecha requerida.</ion-text>
+              </div>
+              <!-- input -->
+              <ion-item>
+                <ion-label>Lugar:</ion-label>
+                <ion-input type="text" formControlName="pPlace"></ion-input>
+              </ion-item>
+              <div class="ion-text-end" *ngIf="form_sent && concertForm.controls.pPlace.invalid">
+                <ion-text color="danger">Lugar requerido.</ion-text>
+              </div>
+              <!-- input -->
+              <ion-item>
+                <ion-label>Artista:</ion-label>
+                <ion-select placeholder="Selecciona uno" formControlName="pArtists">
+                  <ion-select-option value="{{artista.artist_id}}" *ngFor="let artista of artists_list">{{artista.artist_name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <div class="ion-text-end" *ngIf="form_sent && concertForm.controls.pArtists.invalid">
+                <ion-text color="danger">Artista requerido.</ion-text>
+              </div>
+          </ion-card-content>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-button expand="block" fill="outline" type="submit">Registrar</ion-button>
+            </ion-col>
+          </ion-row>
+          </form>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
