@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FormControl, FormGroup,FormBuilder, Validator, Validators } from '@angular/forms';
+import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { ServicesService } from '../../services/services.service';
 import { ToastController } from '@ionic/angular';
 

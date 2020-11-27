@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { GenresModalPageModule } from '../modals/genres-modal/genres-modal.module';
+
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +16,9 @@ import { GenresPage } from './genres.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    GenresPageRoutingModule
+    GenresPageRoutingModule,
+    ReactiveFormsModule,
+    GenresModalPageModule
   ],
   declarations: [GenresPage]
 })
