@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ArtistsModalPageModule } from '../modals/artists-modal/artists-modal.module';
+
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +16,9 @@ import { ArtistsPage } from './artists.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ArtistsPageRoutingModule
+    ArtistsPageRoutingModule,
+    ReactiveFormsModule,
+    ArtistsModalPageModule
   ],
   declarations: [ArtistsPage]
 })
