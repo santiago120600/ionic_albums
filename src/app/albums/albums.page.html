@@ -18,7 +18,7 @@
     </ion-list-header>
   </ion-list>
   
-  <ion-item *ngFor="let album of albums_list">
+  <ion-item *ngFor="let album of albums_list" (click)="select_album(album);">
     <ion-avatar slot="start">
       <img src="./assets/shapes.svg">
     </ion-avatar>

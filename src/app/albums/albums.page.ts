@@ -38,5 +38,18 @@ export class AlbumsPage implements OnInit {
       this.albums_list = data.data;
     });
   }
+  
+  async select_album(_album){
+    const modal = await this.modalController.create({
+      component: AlbumsModalPage,
+      componentProps : {
+        "selected_album" : _album
+      }
+    });
+    modal.onDidDismiss().then((data)=>{
+      this.load_albums();
+    });
+    return await modal.present();
+  }
 
 }

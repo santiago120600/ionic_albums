@@ -44,7 +44,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return handler.handle(request).pipe(
       map((event : HttpEvent<any>) => {
         if(event instanceof HttpResponse){
-          console.info('Log : ',event);
+          // console.info('Log : ',event);
         }
         return event;
       }),

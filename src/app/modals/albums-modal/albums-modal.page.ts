@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormControl, FormGroup,FormBuilder, Validator, Validators } from '@angular/forms';
 import { ServicesService } from '../../services/services.service';
@@ -15,6 +15,7 @@ export class AlbumsModalPage implements OnInit {
   form_sent = false;
   artists_list = [];
   genres_list = [];
+  @Input selected_album : any;
 
   constructor(
     private modalController: ModalController,
@@ -70,6 +71,21 @@ export class AlbumsModalPage implements OnInit {
    }
 
   ngOnInit() {
+    if(this.selected_album){
+      // console.log(this.selected_album);
+      // this.albumForm.controls['pName'].setValue(this.selected_album.album_name);
+      // this.albumForm.controls['pDate'].setValue(this.selected_album.album_date_released);
+      // this.albumForm.controls['pTime'].setValue(this.selected_album.album_time_released);
+      // this.albumForm.controls['pArtists'].setValue(this.selected_album.artist_fk);
+      // this.albumForm.controls['pGenre'].setValue(this.selected_album.genre_fk);
+      this.albumForm.setValue({
+        pName : this.selected_album.album_name,
+        pDate : this.selected_album.album_date_released,
+        pTime : this.selected_album.album_time_released,
+        pArtists : this.selected_album.artist_fk,
+        pGenre : this.selected_album.genre_fk
+      });
+    }
   }
 
   save_album(){
@@ -77,17 +93,31 @@ export class AlbumsModalPage implements OnInit {
     if (this.albumForm.invalid) {
       return;
     }else{
-      this.servicio.do_post("albums/api/albums",this.albumForm.value).subscribe(data => 
-      {
-        
-        if (data.status=200) {
-          this.dismiss();  
-          this.show_toast(data.message,"success");
-        }else{
-          this.dismiss();
-          this.show_toast(data.message,"error");
-        }
-      });
+      if(this.selected_album){
+        var _id = this.selected_album.album_id;
+        this.servicio.do_put("albums/api/albums/pid/"+_id,this.albumForm.value).subscribe(data => 
+        {
+          if (data.status=200) {
+            this.dismiss();  
+            this.show_toast(data.message,"success");
+          }else{
+            this.dismiss();
+            this.show_toast(data.message,"danger");
+          }
+        });
+      }else{
+        this.servicio.do_post("albums/api/albums",this.albumForm.value).subscribe(data => 
+        {
+          if (data.status=200) {
+            this.dismiss();  
+            this.show_toast(data.message,"success");
+          }else{
+            this.dismiss();
+            this.show_toast(data.message,"danger");
+          }
+        });
+      }
+
     }
   }
 

@@ -22,4 +22,8 @@ export class ServicesService {
       return this.httpClient.post<any>(this.api_url+_resource,_data);
     }
 
+    do_put(_resource,_data){
+      return this.httpClient.put<any>(this.api_url+_resource,_data);
+    }
+
 }
