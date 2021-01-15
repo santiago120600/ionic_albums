@@ -18,7 +18,7 @@
     </ion-list-header>
   </ion-list>
   
-  <ion-item *ngFor="let artist of artists_list">
+  <ion-item *ngFor="let artist of artists_list" (click)="select_artist(artist);">
     <ion-avatar slot="start">
       <img src="./assets/shapes.svg">
     </ion-avatar>

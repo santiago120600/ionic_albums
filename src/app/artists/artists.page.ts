@@ -38,4 +38,18 @@ export class ArtistsPage implements OnInit {
     });
   }
 
+  async select_artist(_artist){
+    // console.info(_artist);
+    const modal = await this.modalController.create({
+      component: ArtistsModalPage,
+      componentProps : {
+        "selected_artist" : _artist
+      }
+    });
+    modal.onDidDismiss().then((data)=>{
+      this.load_artists();
+    });
+    return await modal.present();
+  }
+
 }
