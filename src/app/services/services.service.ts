@@ -26,4 +26,8 @@ export class ServicesService {
       return this.httpClient.put<any>(this.api_url+_resource,_data);
     }
 
+    do_delete(_resource){
+      return this.httpClient.delete<any>(this.api_url+_resource);
+    }
+
 }

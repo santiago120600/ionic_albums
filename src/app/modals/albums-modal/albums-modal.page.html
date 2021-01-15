@@ -63,6 +63,7 @@
           <ion-row>
             <ion-col class="ion-text-center">
               <ion-button expand="block" fill="outline" type="submit">Registrar</ion-button>
+              <ion-button expand="block" fill="outline" *ngIf="selected_album" color="danger" (click)="eliminar()">Eliminar</ion-button>
             </ion-col>
           </ion-row>
           </form>
