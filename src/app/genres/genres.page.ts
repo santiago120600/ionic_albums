@@ -39,4 +39,17 @@ export class GenresPage implements OnInit {
     });
   }
 
+  async select_genre(_genre){
+    const modal = await this.modalController.create({
+      component: GenresModalPage,
+      componentProps : {
+        "selected_genre" : _genre
+      }
+    });
+    modal.onDidDismiss().then((data)=>{
+      this.load_genres();
+    });
+    return await modal.present();
+  }
+
 }

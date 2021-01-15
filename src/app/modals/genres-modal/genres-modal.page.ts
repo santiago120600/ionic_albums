@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormControl, FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { ServicesService } from '../../services/services.service';
 import { ToastController } from '@ionic/angular';
+import { AlertController } from "@ionic/angular";
+
 
 @Component({
   selector: 'app-genres-modal',
@@ -12,12 +14,15 @@ import { ToastController } from '@ionic/angular';
 export class GenresModalPage implements OnInit {
   public genreForm: FormGroup;
   form_sent = false;
+  @Input selected_genre: any;
+
 
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private servicio : ServicesService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public alertController: AlertController
   ) {
     this.genreForm = this.formBuilder.group({
 
@@ -31,6 +36,46 @@ export class GenresModalPage implements OnInit {
    }
 
   ngOnInit() {
+    if (this.selected_genre) {
+      this.genreForm.setValue({
+        pGenre: this.selected_genre.genre_name
+      });
+    }
+  }
+
+  async eliminar() {
+    const alert = await this.alertController.create({
+      header: "Eliminar",
+      message: "¿Desea eliminar el genero?",
+      buttons: [
+        {
+          text: "No",
+          role: "cancel",
+          cssClass: "danger",
+          handler: blah => {
+            console.log("Confirm Cancel: blah");
+          }
+        },
+        {
+          text: "Si",
+          handler: () => {
+            if (this.selected_genre) {
+              var _id = this.selected_genre.concert_id;
+              this.servicio.do_delete("genres/api/genres/pid/" + _id, this.genreForm.value).subscribe(data => {
+                  if ((data.status = 200)) {
+                    this.dismiss();
+                    this.show_toast(data.message, "success");
+                  } else {
+                    this.dismiss();
+                    this.show_toast(data.message, "danger");
+                  }
+                });
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   save_genre(){
@@ -38,16 +83,29 @@ export class GenresModalPage implements OnInit {
     if (this.genreForm.invalid) {
       return;
     }else{
-      this.servicio.do_post("genres/api/genres",this.genreForm.value).subscribe(data => 
-      {
-        if (data.status=200) {
-          this.dismiss();  
-          this.show_toast(data.message,"success");
-        }else{
-          this.dismiss();
-          this.show_toast(data.message,"error");
-        }
-      });
+      if (this.selected_genre) {
+        var _id = this.selected_genre.genre_id;
+        this.servicio.do_put("genres/api/genres/pid/" + _id, this.genreForm.value).subscribe(data => {
+            if ((data.status = 200)) {
+              this.dismiss();
+              this.show_toast(data.message, "success");
+            } else {
+              this.dismiss();
+              this.show_toast(data.message, "danger");
+            }
+          });
+      }else{
+        this.servicio.do_post("genres/api/genres",this.genreForm.value).subscribe(data => 
+        {
+          if (data.status=200) {
+            this.dismiss();  
+            this.show_toast(data.message,"success");
+          }else{
+            this.dismiss();
+            this.show_toast(data.message,"danger");
+          }
+        });
+      }
     }
   }
 
