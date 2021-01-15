@@ -18,7 +18,7 @@
     </ion-list-header>
   </ion-list>
   
-  <ion-item *ngFor="let concert of concerts_list">
+  <ion-item *ngFor="let concert of concerts_list" (click)="select_concert(concert);">
     <ion-avatar slot="start">
       <img src="./assets/shapes.svg">
     </ion-avatar>

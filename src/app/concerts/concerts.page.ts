@@ -38,4 +38,17 @@ export class ConcertsPage implements OnInit {
     });
   }
 
+  async select_concert(_concert){
+    const modal = await this.modalController.create({
+      component: ConcertsModalPage,
+      componentProps : {
+        "selected_concert" : _concert
+      }
+    });
+    modal.onDidDismiss().then((data)=>{
+      this.load_concerts();
+    });
+    return await modal.present();
+  }
+
 }
