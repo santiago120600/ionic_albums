@@ -14,7 +14,7 @@ import { AlertController } from "@ionic/angular";
 export class GenresModalPage implements OnInit {
   public genreForm: FormGroup;
   form_sent = false;
-  @Input selected_genre: any;
+  @Input() selected_genre: any;
 
 
   constructor(
@@ -61,7 +61,7 @@ export class GenresModalPage implements OnInit {
           handler: () => {
             if (this.selected_genre) {
               var _id = this.selected_genre.concert_id;
-              this.servicio.do_delete("genres/api/genres/pid/" + _id, this.genreForm.value).subscribe(data => {
+              this.servicio.do_delete("genres/api/genres/pid/" + _id).subscribe(data => {
                   if ((data.status = 200)) {
                     this.dismiss();
                     this.show_toast(data.message, "success");

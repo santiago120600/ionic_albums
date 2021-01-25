@@ -21,7 +21,7 @@ export class AlbumsModalPage implements OnInit {
   form_sent = false;
   artists_list = [];
   genres_list = [];
-  @Input selected_album: any;
+  @Input() selected_album: any;
 
   constructor(
     private modalController: ModalController,
@@ -126,7 +126,7 @@ export class AlbumsModalPage implements OnInit {
           handler: () => {
             if (this.selected_album) {
               var _id = this.selected_album.album_id;
-              this.servicio.do_delete("albums/api/albums/pid/" + _id, this.albumForm.value).subscribe(data => {
+              this.servicio.do_delete("albums/api/albums/pid/" + _id).subscribe(data => {
                   if ((data.status = 200)) {
                     this.dismiss();
                     this.show_toast(data.message, "success");

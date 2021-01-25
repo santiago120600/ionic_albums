@@ -16,7 +16,7 @@ export class ConcertsModalPage implements OnInit {
   public concertForm: FormGroup;
   form_sent = false;
   artists_list = [];
-  @Input selected_concert: any;
+  @Input() selected_concert: any;
 
   
   constructor(
@@ -89,7 +89,7 @@ export class ConcertsModalPage implements OnInit {
           handler: () => {
             if (this.selected_concert) {
               var _id = this.selected_concert.concert_id;
-              this.servicio.do_delete("concerts/api/concerts/pid/" + _id, this.concertForm.value).subscribe(data => {
+              this.servicio.do_delete("concerts/api/concerts/pid/" + _id).subscribe(data => {
                   if ((data.status = 200)) {
                     this.dismiss();
                     this.show_toast(data.message, "success");

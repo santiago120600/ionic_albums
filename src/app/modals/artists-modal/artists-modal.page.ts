@@ -15,7 +15,7 @@ export class ArtistsModalPage implements OnInit {
 
   public artistForm: FormGroup;
   form_sent = false;
-  @Input selected_artist: any;
+  @Input() selected_artist: any;
 
 
   constructor(
@@ -61,7 +61,7 @@ export class ArtistsModalPage implements OnInit {
           handler: () => {
             if (this.selected_artist) {
               var _id = this.selected_artist.artist_id;
-              this.servicio.do_delete("artists/api/artists/pid/" + _id, this.artistForm.value).subscribe(data => {
+              this.servicio.do_delete("artists/api/artists/pid/" + _id).subscribe(data => {
                   if ((data.status = 200)) {
                     this.dismiss();
                     this.show_toast(data.message, "success");
