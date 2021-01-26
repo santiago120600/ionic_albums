@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServicesService {
 
-  api_url = "http://192.168.56.1/codeigniter_api/index.php/";
+  api_url = "http://192.168.0.13/codeigniter_api/index.php/";
 
   constructor(
     private httpClient :HttpClient
